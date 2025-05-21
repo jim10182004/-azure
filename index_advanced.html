@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>股價預測系統</title>
+</head>
+<body style="text-align: center; font-family: Arial;">
+    <h2>輸入股票代號與預測參數</h2>
+    <form action="/predict" method="post">
+        股票代號（如：2330.TW）：<input type="text" name="symbol" required><br><br>
+        起始日期：<input type="date" name="start_date" required><br><br>
+        結束日期：<input type="date" name="end_date" required><br><br>
+        預測天數（1～30）：<input type="number" name="forecast_days" value="5" min="1" max="30"><br><br>
+
+        時間間隔：
+        <select name="interval">
+            <option value="1d">日線</option>
+            <option value="1wk">週線</option>
+            <option value="1mo">月線</option>
+        </select><br><br>
+
+        <label><input type="checkbox" name="show_rsi"> 顯示 RSI</label><br>
+        <label><input type="checkbox" name="show_kd"> 顯示 KD (K, D 線)</label><br>
+        <label><input type="checkbox" name="show_macd"> 顯示 MACD (柱狀圖)</label><br><br>
+
+        <button type="submit">預測</button>
+    </form>
+</body>
+</html>

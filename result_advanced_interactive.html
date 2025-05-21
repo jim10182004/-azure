@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ symbol }} 預測結果</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+        .table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 14px;
+        }
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            text-align: center;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ symbol }} 預測結果</h1>
+
+    {% if rmses %}
+        <h3>模型訓練 RMSE：</h3>
+        <ul style="list-style: none; padding: 0;">
+            {% for model, rmse in rmses.items() %}
+                <li><strong>{{ model }}：</strong> {{ "%.2f"|format(rmse) }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <iframe src="{{ url_for('static', filename='chart.html') }}"
+            width="1000" height="900"
+            frameborder="0"
+            style="margin: 0 auto; display: block;"></iframe>
+
+    <h3>預測表格</h3>
+    <div>
+        {{ prediction_table | safe }}
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+       
+        <pre style="display: inline-block; text-align: left; font-size: 14px;">
+            <div style="display: flex; justify-content: center; margin-top: 40px;">
+                <div style="
+                    background: linear-gradient(to bottom right, #f0f8ff, #e6f2ff);
+                    border-radius: 12px;
+                    padding: 20px 30px;
+                    max-width: 800px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    text-align: left;
+                    font-family: 'Arial', sans-serif;
+                    font-size: 15px;
+                  ">
+                  <h3 style="text-align: center; margin-bottom: 15px;">📊 AI 助理解讀</h3>
+                  <pre style="white-space: pre-wrap; margin: 0;">{{ ai_insight }}</pre>
+                </div>
+              </div>
+              
+        </pre>
+    </div>
+    
+
+    <br>
+    <a href="{{ url_for('home') }}">⬅️ 回首頁</a>
+</body>
+</html>
